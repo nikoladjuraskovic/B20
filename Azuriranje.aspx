@@ -38,7 +38,7 @@
 
                 <hr class="fading_line"/>
 
-                <asp:Button ID="Button1" runat="server" Text="Snimi" />
+                <asp:Button ID="Button1" runat="server" Text="Snimi" OnClick="Button1_Click" />
                 <asp:Button ID="Button2" runat="server" Text="Odustani" />
 
                 

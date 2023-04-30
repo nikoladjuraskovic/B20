@@ -27,7 +27,7 @@
                 <!--<asp:TextBox ID="TextBox1" runat="server" TextMode="DateTime"></asp:TextBox>-->
                 <asp:Label ID="Label2" runat="server" Text="Valuta:"></asp:Label>
                 <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList>
-                <asp:Button ID="Button1" runat="server" Text="Prikaži" />
+                <asp:Button ID="Button1" runat="server" Text="Prikaži" OnClick="Button1_Click" />
                 <asp:Button ID="Button2" runat="server" Text="Dodaj" />
 
                 <hr class="fading_line"/>

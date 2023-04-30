@@ -9,9 +9,30 @@ namespace B20
 {
     public partial class Pregled : System.Web.UI.Page
     {
+
+        localhost.WebService1 servis;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            servis = new localhost.WebService1();
 
+            if (!IsPostBack)
+            {
+                DropDownList1.DataSource = servis.ProcitajSveValute();
+                DropDownList1.DataBind();
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            DateTime izabraniDatum = Calendar1.SelectedDate;
+            string oznakaValute = DropDownList1.SelectedValue;
+            double kurs = servis.ProcitajKursNaDan(izabraniDatum, oznakaValute);
+            if (kurs != 0)
+                Label3.Text = "Kurs na dan: " + kurs;
+            else
+                Label3.Text = "Ne postoji trazeni podatak!";
         }
     }
 }
