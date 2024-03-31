@@ -10,12 +10,12 @@ namespace B20
     public partial class Pregled : System.Web.UI.Page
     {
 
-        localhost.WebService1 servis;
+        ServiceReference1.WebService1SoapClient servis = new ServiceReference1.WebService1SoapClient();
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            servis = new localhost.WebService1();
+            
 
             if (!IsPostBack)
             {

@@ -22,15 +22,5 @@ namespace B20.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44335/WebService1.asmx")]
-        public string B20_localhost_WebService1 {
-            get {
-                return ((string)(this["B20_localhost_WebService1"]));
-            }
-        }
     }
 }

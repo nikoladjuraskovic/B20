@@ -20,28 +20,25 @@ namespace B20
 
         public class Valuta
         {
-            private DateTime datum;
-            private string oznaka;
-            private double kurs;
+            public DateTime Datum { get; set; }
+            public string Oznaka { get; set; }
+            public double Kurs { get; set; }
 
             public Valuta() { }
             public Valuta(DateTime datum, string oznaka, double kurs)
             {
-                this.datum = datum;
-                this.oznaka = oznaka;
-                this.kurs = kurs;
+                this.Datum = datum;
+                this.Oznaka = oznaka;
+                this.Kurs = kurs;
             }
-            public DateTime Datum { get => datum; set => datum = value; }
-            public string Oznaka { get => oznaka; set => oznaka = value; }
-            public double Kurs { get => kurs; set => kurs = value; }
-
+            
             public static List<Valuta> ucitajIzFajla(StreamReader r)
             {
                 List<Valuta> sveValute = new List<Valuta>();
                 while (!r.EndOfStream)
                 {
                     string[] s = r.ReadLine().Split('|');
-                    System.Diagnostics.Debug.WriteLine("Datum: " + s[0] + " Valuta: " + s[1] + " Vrednost: " + s[2]);                   
+                                       
                     Valuta v = new Valuta(DateTime.Parse(s[0]), s[1], double.Parse(s[2]));
                     sveValute.Add(v);
                 }
@@ -52,13 +49,14 @@ namespace B20
         [WebMethod]
         public List<string> ProcitajSveValute()
         {
+         
             StreamReader r = new StreamReader(Server.MapPath("~/Kursevi/valute2.txt"));
-            List<Valuta> listaValuta = Valuta.ucitajIzFajla(r);
+            List<Valuta> listaValuta = Valuta.ucitajIzFajla(r); // sve valute tj. svi redovi iz txt fajla kao objekti tipa Valuta
             r.Close();
-            List<string> sveOznake = new List<string>();
+            List<string> sveOznake = new List<string>(); //hocemo <"EUR", "HRK", "USD", "CAD", "CHF">
             foreach (Valuta x in listaValuta)
             {
-                if (!sveOznake.Contains(x.Oznaka))
+                if (!sveOznake.Contains(x.Oznaka))  //bez if-a <"EUR", "HRK", "EUR"....> bilo bi dupliranje valuta
                     sveOznake.Add(x.Oznaka);
             }
             return sveOznake;
@@ -79,10 +77,13 @@ namespace B20
         }
         [WebMethod]
         public bool UpisiKursNaDan(DateTime Datum, string valuta, double Kurs)
-        {
+        {                                   // format datuma = nacin zapisa datuma: 3.23.2024.  3.24.2024|EUR|117.6
             string upis = Datum.Date.ToString("M.d.yyyy") + "|" + valuta + "|" + Kurs + "\n";
+            
             File.AppendAllText(Server.MapPath("~/Kursevi/valute2.txt"), upis);
             return true;
         }
     }
+
+
 }
